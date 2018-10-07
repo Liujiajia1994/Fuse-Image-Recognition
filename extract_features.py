@@ -1,11 +1,14 @@
 from skimage.feature import greycomatrix,greycoprops
 import numpy as np
+from numpy import *
 import cv2
 from skimage.exposure import equalize_hist
 from skimage.feature import corner_harris, corner_peaks
 from skimage.color import rgb2gray
 from sklearn.decomposition import PCA
 import fourier_descriptor
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
 
 MIN_DESCRIPTOR = 18
 
@@ -92,18 +95,23 @@ if __name__ == '__main__':
         image = load_image(i)
         if image is not None:
             fourier_feature = fourier_descriptor.extract_feature(image)
+            # new_fourier = [[] for i in range(len(fourier_feature))]
+            # for j in range(len(fourier_feature)):
+            #     new_fourier[j].append(fourier_feature[j])
+            # feature_in_file(fourier_feature, './features/FD_feature.txt')
+
+
             contrast, correlation, energy, homogeneity = glcm_feature(image)
-            # print('GLCM统计特征：对比度为%s，相关性为%s，能量为%s，同质度为%s' % (contrast, correlation, energy, homogeneity))
-            # with open('./GLCM_feature.txt', 'a') as file:
+            # # print('GLCM统计特征：对比度为%s，相关性为%s，能量为%s，同质度为%s' % (contrast, correlation, energy, homogeneity))
+            # with open('./features/GLCM_feature.txt', 'a') as file:
             #     file.write(str(contrast) + ' ' + str(correlation)+' '+str(energy)+' '+str(homogeneity)+'\n')
             # file.close()
-
+            #
             harris = harris_feature(image)
+            # # print('第%s个Harris向量为：%s' % (i, harris))
+            # feature_in_file(harris, './features/Harris_feature.txt')
 
-            # print('第%s个Harris向量为：%s' % (i, harris))
-            # feature_in_file(harris, './Harris_feature.txt')
-
-            file = open('./feature.txt', 'a')
+            file = open('./features/FD_GLCM_Harris.txt', 'a')
             for j in range(len(fourier_feature)):
                 file.write(str(fourier_feature[j])+' ')
             file.write(str(contrast)+' '+str(correlation)+' '+str(energy)+' '+str(homogeneity)+' ')

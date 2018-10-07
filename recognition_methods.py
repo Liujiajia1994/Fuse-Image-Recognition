@@ -4,17 +4,13 @@ from sklearn.ensemble import AdaBoostClassifier
 import numpy as np
 from adaboost_classifier import AdaCostClassifier
 
-data_file = './feature.txt'
-target_file = './target'
-# 十折验证
-
 
 def weight_set(samples):
     weight_samples = [1.0 / len(samples) for sample in samples]
     return weight_samples
 
 
-def ten_fold():
+def ten_fold(data_file, target_file):
     clfDTlist = adaBoostList = 0
     skf = StratifiedKFold(n_splits=10)
     X_data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(280)).astype(float)
@@ -39,9 +35,9 @@ def ten_fold():
     print(adaBoostList / 10)
 
 
-def seven_train_thirty_test():
+def seven_train_thirty_test(data_file, target_file, val):
     # 导入数据
-    X_data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(564)).astype(float)
+    X_data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(val)).astype(float)
     y_target = np.genfromtxt(target_file, dtype=str, delimiter=' ', usecols=range(1)).astype(int)
 #     取出前70%的数据作为训练集，30%的数据作为测试集
     X_train = X_data[0:int(X_data.shape[0]*0.7), :]
@@ -49,8 +45,6 @@ def seven_train_thirty_test():
     X_test = X_data[int(X_data.shape[0]*0.7):, :]
     y_test = y_target[int(y_target.size * 0.7):]
     return X_train, y_train, X_test, y_test
-
-feature_importance_file = './Harris_importance.txt'
 
 
 def fuze_sample_weight(FD_path, GLCM_path, Harris_path):
@@ -74,7 +68,7 @@ def fuze_sample_weight(FD_path, GLCM_path, Harris_path):
     return new_weight
 
 
-def get_importance(clf):
+def get_importance(clf, feature_importance_file):
     feature_importance = clf.feature_importances_
     # 将获取的特征重要性值存放入文件
     with open(feature_importance_file, 'a') as file:
@@ -92,10 +86,11 @@ def adaboost_classifier(X_train, y_train, X_test, y_test):
     score = clf2.score(X_test, y_test)
     return score
 
+
 if __name__ == '__main__':
-    # weight_list = fuze_sample_weight('./FD_importance.txt', './GLCM_importance.txt', './Harris_importance.txt')
-    # X_train, y_train, X_test, y_test = seven_train_thirty_test()
-    # # 将权重赋给训练集，形成新的训练集
+    X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/Harris_feature.txt', './features/target',280)
+    # 将权重赋给训练集，形成新的训练集
+    weight_list = fuze_sample_weight('./FD_importance.txt', './GLCM_importance.txt', './Harris_importance.txt')
     # new_train = np.zeros(X_train.shape, dtype=float)
     # for i in range(X_train.shape[0]):
     #     for j in range(X_train.shape[1]):
@@ -111,8 +106,15 @@ if __name__ == '__main__':
     # clf2.fit(new_train, y_train)
     # score = clf2.score(new_test, y_test)
     # print('精度：%s' % score)
-    X_train, y_train, X_test, y_test = seven_train_thirty_test()
-    weights = weight_set(X_train)
-    clf2 = AdaCostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
-    clf2.fit(X_train, y_train, weights)
-    get_importance(clf2)
+    # X_train, y_train, X_test, y_test = seven_train_thirty_test()
+    # weights = weight_set(X_train)
+    # clf2 = AdaCostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
+    # clf2.fit(X_train, y_train, weights)
+    # get_importance(clf2)
+
+    # #  获取特征importance
+    # X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/Harris_feature.txt', './features/target', 280)
+    # clf2 = AdaBoostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
+    # weights = weight_set(X_train)
+    # clf2.fit(X_train, y_train, weights)
+    # get_importance(clf2, './features/Harris_importance.txt')
