@@ -3,6 +3,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier
 import numpy as np
 from adaboost_classifier import AdaCostClassifier
+from sklearn.svm import SVC
+from sklearn.neural_network import BernoulliRBM
 
 
 def weight_set(samples):
@@ -18,10 +20,6 @@ def ten_fold(data_file, target_file):
     for train_index, test_index in skf.split(X_data, y_target):
         X_train, X_test = X_data[train_index], X_data[test_index]
         y_train, y_test = y_target[train_index], y_target[test_index]
-        # clfDT = DecisionTreeClassifier(random_state=0).fit(X_train, y_train)
-        # clfDTlist = clfDT.score(X_test, y_test) + clfDTlist
-        # print('***')
-
         # 权重设置
         weights = weight_set(X_train)
         # print(weights)
@@ -88,9 +86,10 @@ def adaboost_classifier(X_train, y_train, X_test, y_test):
 
 
 if __name__ == '__main__':
-    X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/Harris_feature.txt', './features/target',280)
-    # 将权重赋给训练集，形成新的训练集
-    weight_list = fuze_sample_weight('./FD_importance.txt', './GLCM_importance.txt', './Harris_importance.txt')
+    X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/Harris_feature.txt', './features/target', 280)
+    # # # 将权重赋给训练集，形成新的训练集
+    # weight_list = fuze_sample_weight('./features/FD_importance.txt', './features/GLCM_importance.txt',
+    #                                  './features/Harris_importance.txt')
     # new_train = np.zeros(X_train.shape, dtype=float)
     # for i in range(X_train.shape[0]):
     #     for j in range(X_train.shape[1]):
@@ -102,19 +101,32 @@ if __name__ == '__main__':
     #     for j in range(X_test.shape[1]):
     #         new_test[i][j] = X_test[i][j]*weight_list[j]
     # # 接下来进行训练并测试
-    # clf2 = AdaBoostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
-    # clf2.fit(new_train, y_train)
-    # score = clf2.score(new_test, y_test)
-    # print('精度：%s' % score)
-    # X_train, y_train, X_test, y_test = seven_train_thirty_test()
-    # weights = weight_set(X_train)
-    # clf2 = AdaCostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
-    # clf2.fit(X_train, y_train, weights)
-    # get_importance(clf2)
+    # clf = DecisionTreeClassifier(random_state=0)
+    # clf.fit(X_train, y_train)
+    # score = clf.score(X_test, y_test)
+    # print('DT分类精度：%s' % score)
+    clf2 = AdaBoostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
+    weights = weight_set(X_train)
+    clf2.fit(X_train, y_train, weights)
+    score2 = clf2.score(X_test, y_test)
+    print('AdaBoost加权后的精度：%s' % score2)
+    # clf4 = SVC()
+    # clf4.fit(X_train, y_train)
+    # score4 = clf4.score(X_test, y_test)
+    # print('SVC分类精度：%s' % score4)
+    # clf5 = AdaBoostClassifier(SVC(), algorithm='SAMME')
+    # clf5.fit(new_train, y_train)
+    # score5 = clf5.score(new_test, y_test)
+    # print('AdaBoost加权后的精度：%s' % score5)
+
+    # clf3 = AdaCostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
+    # clf3.fit(new_train, y_train)
+    # score3 = clf3.score(new_test, y_test)
+    # print('AdaCost加权后的精度：%s' % score3)
 
     # #  获取特征importance
-    # X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/Harris_feature.txt', './features/target', 280)
-    # clf2 = AdaBoostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
+    # X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/FD_feature.txt', './features/target', 280)
+    # clf2 = AdaCostClassifier(DecisionTreeClassifier(random_state=0), algorithm='SAMME')
     # weights = weight_set(X_train)
     # clf2.fit(X_train, y_train, weights)
-    # get_importance(clf2, './features/Harris_importance.txt')
+    # get_importance(clf2, './features/FD_cost.R_importance.txt')
