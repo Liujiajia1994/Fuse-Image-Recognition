@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import extract_features
 import math
 
 fd_len = 280
@@ -34,7 +33,7 @@ pi = 3.1415926
 
 def getCentroid(pic):
     (m, n) = pic.shape
-    r = 0;
+    r = 0
     c = 0
     count = 0
     for i in range(0, m):
@@ -94,9 +93,9 @@ def extract_feature(pic):
     # 获取质心
     ctr = getCentroid(pic)
     # 获取轮廓
-    contours = getContours(pic)
+    # contours = getContours(pic)
     # the below func rise the accuracy about 3.5%
-    #  contours = gst.getMaxContour(pic)
+    contours = getMaxContour(pic)
     # 计算轮廓到质心的距离
     shape_signt = centroid_dist(contours, ctr)
     # 傅立叶描述子
@@ -105,14 +104,29 @@ def extract_feature(pic):
     return fds
 
 
-if __name__ == '__main__':
-    for i in range(4938):
-        image = extract_features.load_image(i)
-        if image is not None:
-            fourier_feature = extract_feature(image)
-            if i % 2 == 0:
-                extract_features.feature_in_file(fourier_feature, './eddy_FD_feature.txt')
-            else:
-                extract_features.feature_in_file(fourier_feature, './other_FD_feature.txt')
-        else:
-            print('无法写入文件中！')
+def getMaxContour(pic):
+    img, contours, hrc = cv2.findContours(pic, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    max_area = 0
+    max_idx = 0
+    area = 0
+    for i in range(0, len(contours)):
+        area = cv2.contourArea(contours[i])
+        if area > max_area:
+            max_idx = i
+            max_area = area
+    cts = np.array(contours[max_idx])
+    cts = cts.reshape(cts.shape[0], 2)
+    return cts
+
+
+# if __name__ == '__main__':
+#     for i in range(4938):
+#         image = extract_features.load_image(i)
+#         if image is not None:
+#             fourier_feature = extract_feature(image)
+#             if i % 2 == 0:
+#                 extract_features.feature_in_file(fourier_feature, './eddy_FD_feature.txt')
+#             else:
+#                 extract_features.feature_in_file(fourier_feature, './other_FD_feature.txt')
+#         else:
+#             print('无法写入文件中！')
