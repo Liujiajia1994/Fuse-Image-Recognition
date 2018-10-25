@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92132858-2202-4a45-ab4a-59d0e87fac57" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/HOG_feature.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fourier_descriptor.py" beforeDir="false" afterPath="$PROJECT_DIR$/fourier_descriptor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recognition_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/recognition_methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_preprocess.py" afterDir="false" />
     </list>
     <ignored path="Fuse Image Recognition.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,8 +21,8 @@
     <SUITE FILE_PATH="coverage/Fuse Image Recognition$main.coverage" NAME="main Coverage Results" MODIFIED="1537925953356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$image_detect.coverage" NAME="image_detect Coverage Results" MODIFIED="1539697721682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse Image Recognition$recognition_methods.coverage" NAME="recognition_methods Coverage Results" MODIFIED="1537927498954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$data_preprocess.coverage" NAME="data_preprocess Coverage Results" MODIFIED="1539928325103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$fourier_descriptor.coverage" NAME="fourier_descriptor Coverage Results" MODIFIED="1540345641149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$data_preprocess.coverage" NAME="data_preprocess Coverage Results" MODIFIED="1540454987521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$trans_to_gray_image.coverage" NAME="trans_to_gray_image Coverage Results" MODIFIED="1539179893857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse Image Recognition$similar_weight__1_.coverage" NAME="similar_weight (1) Coverage Results" MODIFIED="1536846784575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Fuse_Image_Recognition$main.coverage" NAME="main Coverage Results" MODIFIED="1540358113191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -36,6 +33,20 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="Fuse Image Recognition" />
   </component>
@@ -44,8 +55,8 @@
       <file leaf-file-name="extract_features.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extract_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+            <state relative-caret-position="1740">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -53,11 +64,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recognition_methods.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data_preprocess.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data_preprocess.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="97" column="18" lean-forward="true" selection-start-line="97" selection-start-column="18" selection-end-line="97" selection-end-column="18" />
+              <folding>
+                <element signature="e#16#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recognition_methods.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recognition_methods.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1432">
-              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+            <state relative-caret-position="3300">
+              <caret line="116" column="32" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -97,7 +120,6 @@
         <option value="$PROJECT_DIR$/features/eddy_detect.py" />
         <option value="$PROJECT_DIR$/features/image_detect.py" />
         <option value="$PROJECT_DIR$/image_detect.py" />
-        <option value="$PROJECT_DIR$/data_preprocess.py" />
         <option value="$PROJECT_DIR$/fourier_descriptor.py" />
         <option value="$PROJECT_DIR$/pca_features.py" />
         <option value="$PROJECT_DIR$/features/Harris_pca_feature.txt" />
@@ -105,6 +127,7 @@
         <option value="$PROJECT_DIR$/HOG_feature.py" />
         <option value="$PROJECT_DIR$/recognition_methods.py" />
         <option value="$PROJECT_DIR$/extract_features.py" />
+        <option value="$PROJECT_DIR$/data_preprocess.py" />
       </list>
     </option>
   </component>
@@ -171,7 +194,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.recognition_methods">
+  <component name="RunManager" selected="Python.data_preprocess">
     <configuration name="HOG_feature" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Fuse Image Recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,7 +214,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="fourier_descriptor" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="data_preprocess" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Fuse Image Recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -204,7 +227,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fourier_descriptor.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_preprocess.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -477,17 +500,17 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.recognition_methods" />
-      <item itemvalue="Python.fourier_descriptor" />
       <item itemvalue="Python.pca_features" />
       <item itemvalue="Python.HOG_feature" />
+      <item itemvalue="Python.data_preprocess" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_preprocess" />
         <item itemvalue="Python.recognition_methods" />
         <item itemvalue="Python.HOG_feature" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.pca_features" />
-        <item itemvalue="Python.fourier_descriptor" />
       </list>
     </recent_temporary>
   </component>
@@ -515,13 +538,12 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.329602" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2782516" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28144988" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.12526652" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.18496802" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.39869282" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" visible="true" weight="0.39869282" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -529,6 +551,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,28 +577,37 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="74" />
+      <option name="time" value="81" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="41" column="52" selection-start-line="41" selection-end-line="41" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/similar_weight.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extract_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="65" column="9" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+        <state relative-caret-position="1740">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recognition_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3300">
+          <caret line="116" column="32" lean-forward="true" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_preprocess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
+          <folding>
+            <element signature="e#16#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -583,9 +615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2641">
           <caret line="173" selection-start-line="173" selection-end-line="173" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -605,9 +634,6 @@
           <caret line="41" column="52" selection-start-line="41" selection-end-line="41" selection-end-column="52" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/similar_weight.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target" />
     <entry file="file://$PROJECT_DIR$/loadImage.py" />
@@ -657,16 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1178">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_preprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="64" column="18" lean-forward="true" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -716,63 +732,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/Harris_pca_feature.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/Harris_pca_importance.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/FD_GLCM_Harris_pca.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/HOG_pca_feature.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/GLCM_HOG_pca_feature.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/HOG_feature.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="141" column="55" selection-start-line="141" selection-start-column="55" selection-end-line="141" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pca_features.py">
+    <entry file="file://$PROJECT_DIR$/pca_features.py" />
+    <entry file="file://$PROJECT_DIR$/recognition_methods.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        <state relative-caret-position="3300">
+          <caret line="116" column="32" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extract_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+        <state relative-caret-position="1740">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recognition_methods.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/scipy/ndimage/interpolation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1432">
-          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+        <state relative-caret-position="297">
+          <caret line="610" column="4" selection-start-line="610" selection-start-column="4" selection-end-line="610" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/numpy/random/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-218">
+          <caret line="750" selection-start-line="750" selection-end-line="750" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_preprocess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="97" column="18" lean-forward="true" selection-start-line="97" selection-start-column="18" selection-end-line="97" selection-end-column="18" />
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#16#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
