@@ -5,16 +5,17 @@ import math
 fd_len = 280
 pi = 3.1415926
 
+
 # # FD特征 傅立叶描述子Fourier descriptor
-# def fourier_descriptor_feature(img):
-#     contour = []
-#     binary, contour, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE, contour)
-#     contour_array = contour[0][:, 0, :]
-#     contour_complex = np.empty(contour_array.shape[:-1], dtype=complex)
-#     contour_complex.real = contour_array[:, 0]
-#     contour_complex.imag = contour_array[:, 1]
-#     fourier_result = np.fft.fft(contour_complex)
-#     return fourier_result
+def fourier_descriptor_feature(img):
+    contour = []
+    binary, contour, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE, contour)
+    contour_array = contour[0][:, 0, :]
+    contour_complex = np.empty(contour_array.shape[:-1], dtype=complex)
+    contour_complex.real = contour_array[:, 0]
+    contour_complex.imag = contour_array[:, 1]
+    fourier_result = np.fft.fft(contour_complex)
+    return fourier_result
 #
 #
 # def truncate_descriptor(descriptors, degree):
@@ -31,18 +32,24 @@ pi = 3.1415926
 #     return descriptors
 
 
-def getCentroid(pic):
-    (m, n) = pic.shape
-    r = 0
-    c = 0
-    count = 0
-    for i in range(0, m):
-        for j in range(0, n):
-            if pic[i][j] > 0:
-                r += i
-                c += j
-                count += 1
-    return int(r / count), int(c / count)
+def getCentroid(cnt):
+    # (m, n) = pic.shape
+    # r = 0
+    # c = 0
+    # count = 0
+    # for i in range(0, m):
+    #     for j in range(0, n):
+    #         if pic[i][j] > 0:
+    #             r += i
+    #             c += j
+    #             count += 1
+    # return int(r / count), int(c / count)
+    M = cv2.moments(cnt)
+    cx = int(M['m10'] / M['m00'])
+    cy = int(M['m01'] / M['m00'])
+    print('the image coordinate parameter ', 'X:', cx)
+    print('the image coordinate parameter ', 'Y:', cy)
+    return cx, cy
 
 
 def centroid_dist(boundarys, centroid):
@@ -70,10 +77,7 @@ def FDFT(shape_signt):
 
 
 def getContours(pic):
-    img, contours, hrc = cv2.findContours(pic, cv2.RETR_EXTERNAL,
-                                          cv2.CHAIN_APPROX_NONE)
-    # shape of contours: (1, 136, 1, 2)
-    # or (2,) and for 0: (136, 1, 2), for 1: (4, 1, 2)
+    img, contours, hrc = cv2.findContours(pic, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     cts = np.array(contours[0])
     cts = cts.reshape(cts.shape[0], 2)
     return cts
@@ -90,12 +94,12 @@ def getContours(pic):
 
 
 def extract_feature(pic):
+    # 获取轮廓
+    contours = getContours(pic)
     # 获取质心
     ctr = getCentroid(pic)
-    # 获取轮廓
-    # contours = getContours(pic)
     # the below func rise the accuracy about 3.5%
-    contours = getMaxContour(pic)
+    # contours = getMaxContour(pic)
     # 计算轮廓到质心的距离
     shape_signt = centroid_dist(contours, ctr)
     # 傅立叶描述子
