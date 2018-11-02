@@ -1,14 +1,15 @@
 import numpy as np
 from sklearn.model_selection import StratifiedKFold
+from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
 target_file = 'F:/download_SAR_data/experiment_data/dataset/target/target.txt'
-data_file = './features/GLCM+FD+Harris_pca_features.txt'
+data_file = './features/Harris_10_features.txt'
 if __name__ == '__main__':
-    score_DT = score_SVC = score_KNN = 0
-    data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(294)).astype(float)
+    score_DT = score_SVC = score_KNN = score_MLP = 0
+    data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(10)).astype(float)
     target = np.genfromtxt(target_file, dtype=str, delimiter=',', usecols=range(1)).astype(int)
     # 还是采用十折交叉验证来分类
     skf = StratifiedKFold(n_splits=10)
@@ -30,6 +31,12 @@ if __name__ == '__main__':
         clf5.fit(X_train, y_train)
         print('KNN分类精度：%s' % (clf5.score(X_test, y_test)))
         score_KNN += clf5.score(X_test, y_test)
+    #     MLP分类
+    #     clf6 = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+    #     clf6.fit(X_train, y_train)
+    #     print('MLP分类精度：%s' % (clf6.score(X_test, y_test)))
+    #     score_MLP += clf6.score(X_test, y_test)
     print('DT最后的分类精度：%s' % (score_DT/10))
     print('SVC最后的分类精度：%s' % (score_SVC/10))
     print('KNN最后的分类精度：%s' % (score_KNN/10))
+    # print('MLP最后的分类精度：%s' % (score_MLP/10))

@@ -101,31 +101,31 @@ class Hog_descriptor():
 
 
 def hog_feature(image):
-    # hog = Hog_descriptor(image, cell_size=8, bin_size=9)
-    # vector, image_hog = hog.extract()
-    # if vector is None or image_hog is None:
-    #     return None
-    # else:
-    #     array_vector = np.array(vector)
-    #     # # 对数组中nan值进行处理
-    #     # for i in range(array_vector.shape[0]):
-    #     #     for j in range(array_vector.shape[1]):
-    #     #         if math.isnan(array_vector[i][j]):
-    #     #             break
-    #     # 要获取全部的特征还需要做归一化处理
-    #     lbpTranpose = array_vector.transpose()
-    #     pca = PCA(n_components=1)
-    #     pca.fit(lbpTranpose)
-    #     newData = pca.transform(lbpTranpose)
-    #     hogTranpose = np.array(newData).transpose()
-    #     return hogTranpose
-    orientations = 9
-    pixels_per_cell = [5, 5]
-    cells_per_block = [3, 3]
-    visualize = False
-    transform_sqrt = True
-    hog_feature = hog(image, orientations, pixels_per_cell, cells_per_block, visualise=visualize, transform_sqrt=transform_sqrt)
-    return hog_feature
+    hog = Hog_descriptor(image, cell_size=8, bin_size=9)
+    vector, image_hog = hog.extract()
+    if vector is None or image_hog is None:
+        return None
+    else:
+        array_vector = np.array(vector)
+        # # 对数组中nan值进行处理
+        # for i in range(array_vector.shape[0]):
+        #     for j in range(array_vector.shape[1]):
+        #         if math.isnan(array_vector[i][j]):
+        #             break
+        # 要获取全部的特征还需要做归一化处理
+        lbpTranpose = array_vector.transpose()
+        pca = PCA(n_components=1)
+        pca.fit(lbpTranpose)
+        newData = pca.transform(lbpTranpose)
+        hogTranpose = np.array(newData).transpose()
+        return hogTranpose
+    # orientations = 9
+    # pixels_per_cell = [5, 5]
+    # cells_per_block = [3, 3]
+    # visualize = False
+    # transform_sqrt = True
+    # hog_feature = hog(image, orientations, pixels_per_cell, cells_per_block, visualise=visualize, transform_sqrt=transform_sqrt)
+    # return hog_feature
 
 # for i in range(1):
 #     img = cv2.imread('./eddyData/train/eddy/'+str(i)+'.tif', cv2.IMREAD_GRAYSCALE)

@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 from scipy.ndimage.interpolation import rotate
 import random
 
-data_file = 'F:\\download_SAR_data\\experiment_data\\eddy\\'
+data_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\new_eddy\\'
 save_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\eddy\\'
 
 
-# 裁剪图片的四个280*280，以及中间的一块
+# 裁剪图片的四个71*71，以及中间的一块
 def defined_crop(i, img):
     h, w = img.shape
     print('裁剪第'+str(i)+'张图片')
@@ -101,7 +101,7 @@ def file_rename():
 # 尺度变换
 def scale_augmentation(image, i, crop_size):
     # scale_size = np.random.randint(*scale_range)
-    scale_size = (i+2)*100
+    scale_size = int((0.2*i+1)*crop_size)
     image = imresize(image, (scale_size, scale_size))
     # image = random_crop(image, crop_size)
     image = center_crop(image, crop_size)
@@ -126,11 +126,12 @@ def random_rotation(i,image):
 # 生成5张图片
 def generate_image(i, image, arg):
     count = 1
+    crop_size = image.shape[0] if image.shape[0] < image.shape[1] else image.shape[1]
     while 1:
         if( arg == 'rotation'):
             images = random_rotation(count, image)
         else:
-            images = scale_augmentation(image, count, 280)
+            images = scale_augmentation(image, count, crop_size)
         # # 显示图片
         # plt.subplot(121)
         # plt.imshow(image, cmap='gray')
@@ -144,8 +145,19 @@ def generate_image(i, image, arg):
             break
 
 
+def read_shape():
+    for i in range(136):
+        print('正在读取第'+str(i)+'张图片')
+        image = cv2.imread(data_file + str(i) + '.tif', 0)
+        if image is not None:
+            print('第' + str(i) + '张图片为', image.shape)
+        else:
+            print('无法读取第'+str(i)+'张图片')
+
+
 if __name__ == '__main__':
     file_rename()
+    # read_shape()
     # for i in range(136):
     #     print('正在读取第'+str(i)+'张图片')
     #     image = cv2.imread(data_file + str(i) + '.tif', 0)

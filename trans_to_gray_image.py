@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 
 if __name__ =='__main__':
     # 获取文件的个数
-    DIR = 'C:\\Users\\lenovo\\Desktop\\SAR'
+    DIR = 'F:/download_SAR_data/experiment_data/dataset/eddy'
     length = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
-    for i in range(length):
+    for i in range(2040):
         fig, ax = plt.subplots()
         print('正在读取第'+str(i)+'个图片')
-        image = cv2.imread(DIR +'\\'+ str(i) + '.tif')
+        image = cv2.imread(DIR + '/' + 'eddy-' + str(i) + '.tif')
         if image is not None:
             image = cv2.resize(image, (280, 280), interpolation=cv2.INTER_CUBIC)
             gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -32,7 +32,7 @@ if __name__ =='__main__':
         #     将图像存放在文件夹里
         #     cv2.imwrite('C:\\Users\\lenovo\\Desktop\\grayEddyImage\\'+str(i)+'.tif', gray_image)
             # dpi是设置清晰度
-            plt.savefig('C:\\Users\\lenovo\\Desktop\\grayEddyImage\\'+str(i)+'.tif', dpi=300)
+            plt.savefig('F:/download_SAR_data/experiment_data/dataset/gray_eddy/'+str(i)+'.tif', dpi=300)
             plt.show()
         else:
             print('无法保存第' + str(i) + '个图片')
