@@ -1,6 +1,6 @@
 import cv2
 import os
-from extract_features import glcm_feature, harris_feature
+from extract_features import glcm_feature, harris_feature, lbp_feature, hu_feature
 import fourier_descriptor
 from HOG_feature import hog_feature
 
@@ -34,25 +34,33 @@ if __name__ == '__main__':
             # 统一尺寸
             image = cv2.resize(image, (67, 67), interpolation=cv2.INTER_CUBIC)
         #     提取灰度共生矩阵的4个统计特征
-            contrast, correlation, energy, homogeneity = glcm_feature(image)
+        #     contrast, correlation, energy, homogeneity = glcm_feature(image)
             # print(contrast, correlation, energy, homogeneity)
-            # 用质心做的
+            # 用质心做的 傅里叶描述子
             # fourier_feature = fourier_descriptor.extract_feature(image)
-            # print(fourier_feature)
+            # print(fourier_feature.shape)
             # Harris特征
             # harris = harris_feature(image)
+        #     LBP特征
+        #     lbp = lbp_feature(image)
+        #     print(i, len(lbp))
+        #     Hu特征
+            hu = hu_feature(image)
+            print(i, len(hu))
         #     HOG特征
-        # #     hog = hog_feature(image)
+        #     hog = hog_feature(image)
         #     if hog is None:
         #         print('无法获取该图片的HOG特征')
         #         # 不计入target中,z需要将其取出
         #         target.pop()
         #         break
         #     else:
-            #     写入文件
-            with open('./features/GLCM_features.txt', 'a') as file:
-                file.write(str(contrast) + ' ' + str(correlation) + ' ' + str(energy) + ' ' + str(homogeneity) + ' ')
-                # for j in range(280):
+        #         print('写入HOG文件')
+        #         print(hog.shape)
+        #     写入文件
+            with open('./features/Hu_features.txt', 'a') as file:
+                # file.write(str(contrast) + ' ' + str(correlation) + ' ' + str(energy) + ' ' + str(homogeneity) + ' ')
+                # for j in range(67):
                 #     file.write(str(fourier_feature[j])+' ')
                 # for k in range(len(harris)):
                 #     file.write(str(harris[k][0])+' ')
@@ -61,6 +69,10 @@ if __name__ == '__main__':
                 #     file.write(str(harris[0][k]) + ' ')
                 # for n in range(len(hog[0])):
                 #     file.write(str(hog[0][n])+' ')
+                # for l in range(len(lbp)):
+                #     file.write(str(lbp[l])+' ')
+                for h in range(len(hu)):
+                    file.write(str(hu[h][0]) + ' ')
                 file.write('\n')
             file.close()
         else:

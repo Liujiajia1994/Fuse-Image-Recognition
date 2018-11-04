@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-fd_len = 280
+fd_len = 67
 pi = 3.1415926
 
 

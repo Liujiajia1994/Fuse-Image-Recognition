@@ -1,4 +1,4 @@
-from skimage.feature import greycomatrix,greycoprops
+from skimage.feature import greycomatrix, greycoprops, local_binary_pattern
 import numpy as np
 from numpy import *
 import cv2
@@ -9,17 +9,21 @@ from sklearn.decomposition import PCA
 import fourier_descriptor
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
+from datetime import datetime
 
 MIN_DESCRIPTOR = 18
 eddy_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\eddy\\'
 land_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\land\\'
+# settings for LBP
+radius = 1
+n_points = 8*radius
 
 
 def load_image(i):
     print('正在读取第' + str(i) + '个图片')
-    img = cv2.imread(eddy_file + 'eddy' + str(i) + '.tif', 0)
+    img = cv2.imread(eddy_file + 'eddy-' + str(i) + '.tif', 0)
     if img is not None:
-        img = cv2.resize(img, (280, 280), interpolation=cv2.INTER_CUBIC)
+        img = cv2.resize(img, (67, 67), interpolation=cv2.INTER_CUBIC)
     else:
         print('无法读取第'+str(i)+'个图片')
     return img
@@ -65,23 +69,41 @@ def harris_feature(img):
     # 使用corner_harris获取角点
     harris = corner_harris(mandrill)
     # 280*280 PCA降维 280*1
-    # pca = PCA(n_components=1)
-    # new_harris = pca.fit_transform(harris)
-    # return new_harris
-
-    # PCA
-    pca = PCA(n_components=10)
-    pca.fit(harris)
-    pcaharris = pca.transform(harris)
-    # print(pcaharris.shape)
-    pcaharris = np.array(pcaharris).transpose()
-    # print(pcaharris.shape)
-
     pca = PCA(n_components=1)
-    pca.fit(pcaharris)
-    pcaharris = pca.transform(pcaharris)
-    pcaharris = np.array(pcaharris).transpose()
-    return pcaharris
+    new_harris = pca.fit_transform(harris)
+    return new_harris
+
+    # # PCA
+    # pca = PCA(n_components=10)
+    # pca.fit(harris)
+    # pcaharris = pca.transform(harris)
+    # # print(pcaharris.shape)
+    # pcaharris = np.array(pcaharris).transpose()
+    # # print(pcaharris.shape)
+    #
+    # pca = PCA(n_components=1)
+    # pca.fit(pcaharris)
+    # pcaharris = pca.transform(pcaharris)
+    # pcaharris = np.array(pcaharris).transpose()
+    # return pcaharris
+
+
+# LBP特征
+def lbp_feature(image):
+    lbp = local_binary_pattern(image, n_points, radius,method='uniform')
+# 1,8,ror = 256; 1,8,uniform = 10;1,8,nri_uniform = 59;
+    n_bins = int(lbp.max() + 1)
+    hist, _ = np.histogram(lbp, normed=True, bins=n_bins, range=(0, n_bins))
+    return hist
+
+
+# Hu不变矩特征
+def hu_feature(image):
+    moments = cv2.moments(image)
+    humoments = cv2.HuMoments(moments)
+    humoments = np.log(np.abs(humoments))  # 同样建议取对数
+    # print(humoments)
+    return humoments
 
 
 # 写入文件
@@ -95,10 +117,16 @@ def feature_in_file(feature, file_path):
 
 
 # if __name__ == '__main__':
-#     for i in range(4938):
-#         image = load_image(i)
-#         if image is not None:
-#             fourier_feature = fourier_descriptor.extract_feature(image)  # 280
+    # t1 = datetime.now()
+    # for i in range(1964):
+    #     image = load_image(i)
+    #     if image is not None:
+    #         # Hu不变矩
+    #         hu = hu_feature(image)  # 7*1
+    #         print(len(hu))
+    #         for h in range(len(hu)):
+    #             print(hu[h][0])
+            # fourier_feature = fourier_descriptor.extract_feature(image)  # 280
 #             # new_fourier = [[] for i in range(len(fourier_feature))]
 #             # for j in range(len(fourier_feature)):
 #             #     new_fourier[j].append(fourier_feature[j])
@@ -123,3 +151,4 @@ def feature_in_file(feature, file_path):
 #                 file.write(str(harris[0][k])+' ')
 #             file.write('\n')
 #             file.close()
+#             print(datetime.now() - t1)

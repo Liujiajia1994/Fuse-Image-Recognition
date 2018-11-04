@@ -6,10 +6,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
 target_file = 'F:/download_SAR_data/experiment_data/dataset/target/target.txt'
-data_file = './features/GLCM_features.txt'
+data_file = './features/Hu_features.txt'
 if __name__ == '__main__':
     score_DT = score_SVC = score_KNN = score_MLP = 0
-    data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(4)).astype(float)
+    data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(7)).astype(float)
     target = np.genfromtxt(target_file, dtype=str, delimiter=',', usecols=range(1)).astype(int)
     # 还是采用十折交叉验证来分类
     skf = StratifiedKFold(n_splits=10)
@@ -27,7 +27,7 @@ if __name__ == '__main__':
         print('SVC分类精度：%s' % (clf4.score(X_test, y_test)))
         score_SVC += clf4.score(X_test, y_test)
     #     KNN分类
-        clf5 = KNeighborsClassifier(n_neighbors=2)
+        clf5 = KNeighborsClassifier(n_neighbors=3)
         clf5.fit(X_train, y_train)
         print('KNN分类精度：%s' % (clf5.score(X_test, y_test)))
         score_KNN += clf5.score(X_test, y_test)
