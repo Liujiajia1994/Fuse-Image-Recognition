@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from scipy.ndimage.interpolation import rotate
 import random
 
-data_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\new_eddy\\'
-save_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\eddy\\'
+data_file = 'F:\\download_SAR_data\\experiment_data\\no_processed_big_water_data\\'
+save_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\sea_water\\'
 
 
 # 裁剪图片的四个71*71，以及中间的一块
@@ -93,7 +93,7 @@ def file_rename():
             continue
         filename = os.path.splitext(files)[0]#文件名
         filetype = os.path.splitext(files)[1]#文件扩展名
-        Newdir = os.path.join(path, 'eddy-'+str(count)+filetype)#新的文件路径
+        Newdir = os.path.join(path, 'water-'+str(count)+filetype)#新的文件路径
         os.rename(Olddir,Newdir)#重命名
         count += 1
 
@@ -126,12 +126,13 @@ def random_rotation(i,image):
 # 生成5张图片
 def generate_image(i, image, arg):
     count = 1
-    crop_size = image.shape[0] if image.shape[0] < image.shape[1] else image.shape[1]
+    # crop_size = image.shape[0] if image.shape[0] < image.shape[1] else image.shape[1]
     while 1:
-        if( arg == 'rotation'):
-            images = random_rotation(count, image)
-        else:
-            images = scale_augmentation(image, count, crop_size)
+        # if( arg == 'rotation'):
+        #     images = random_rotation(count, image)
+        # else:
+        #     images = scale_augmentation(image, count, crop_size)
+        images = random_crop(image, 280)
         # # 显示图片
         # plt.subplot(121)
         # plt.imshow(image, cmap='gray')
@@ -141,14 +142,14 @@ def generate_image(i, image, arg):
         print('正在保存第' + str(i) + '-' + str(count) + '张图片')
         cv2.imwrite(save_file + str(i) + arg + '-' + str(count) + '.tif', images)
         count += 1
-        if count == 6:
+        if count == 7:
             break
 
 
 def read_shape():
-    for i in range(136):
+    for i in range(1965):
         print('正在读取第'+str(i)+'张图片')
-        image = cv2.imread(data_file + str(i) + '.tif', 0)
+        image = cv2.imread(save_file + 'eddy-'+str(i) + '.tif', 0)
         if image is not None:
             print('第' + str(i) + '张图片为', image.shape)
         else:
@@ -158,14 +159,16 @@ def read_shape():
 if __name__ == '__main__':
     file_rename()
     # read_shape()
-    # for i in range(136):
-    #     print('正在读取第'+str(i)+'张图片')
-    #     image = cv2.imread(data_file + str(i) + '.tif', 0)
-    #     if image is not None:
-    #         defined_crop(i, image)
-    #         generate_image(i, image, 'rotation')
-    #         generate_image(i, image, 'scale')
-    #     else:
-    #         print('无法读取第'+str(i)+'张图片')
+    # for i in range(15):
+    #     print('正在读取第'+str(i+1)+'张图片')
+    #     image = cv2.imread(data_file + str(i+1) + '.tif', 0)
+    #     generate_image(i, image, 'water')
+    # #     if image is not None:
+    # #         # defined_crop(i, image)
+    # #         # generate_image(i, image, 'rotation')
+    # #         # generate_image(i, image, 'scale')
+    # #     else:
+    # #         print('无法读取第'+str(i)+'张图片')
+    # #     i += 2
 
 
