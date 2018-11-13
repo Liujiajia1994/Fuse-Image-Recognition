@@ -1,8 +1,12 @@
 import cv2
 import os
+
+from sklearn.decomposition import PCA
+
 from extract_features import glcm_feature, harris_feature, lbp_feature, hu_feature
 import fourier_descriptor
 from HOG_feature import hog_feature
+from pywavelet_feature import pywt_feature, gabor_feature
 
 eddy_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\eddy\\'
 land_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\land\\'
@@ -14,7 +18,7 @@ if __name__ == '__main__':
     COUNT_WATER = len([name for name in os.listdir(water_file) if os.path.isfile((os.path.join(water_file, name)))])
     flag_eddy = flag_land = flag_water = 0
     target = []
-    for i in range(COUNT_EDDY+COUNT_LAND+COUNT_WATER):
+    for i in range(1):
         if i % 3 == 0:
             print('正在读取eddy-' + str(flag_eddy) + '.tif图片')
             image = cv2.imread(eddy_file + 'eddy-' + str(flag_eddy) + '.tif', 0)
@@ -44,9 +48,16 @@ if __name__ == '__main__':
         #     LBP特征
         #     lbp = lbp_feature(image)
         #     print(i, len(lbp))
+        #     小波变换 纹理特征
+        #     pywt = pywt_feature(image)
+            # print(len(pywt))
+            #     for w in range(len(pywt[p])):
+            #         print(len(pywt[p][w]))
+        #     Gabor小波 纹理
+        #     gabor = gabor_feature(image)
         #     Hu特征
             hu = hu_feature(image)
-            print(i, len(hu))
+        #     print(i, len(hu))
         #     HOG特征
         #     hog = hog_feature(image)
         #     if hog is None:
@@ -71,8 +82,11 @@ if __name__ == '__main__':
                 #     file.write(str(hog[0][n])+' ')
                 # for l in range(len(lbp)):
                 #     file.write(str(lbp[l])+' ')
-                for h in range(len(hu)):
-                    file.write(str(hu[h][0]) + ' ')
+                # for h in range(len(hu)):
+                #     file.write(str(hu[h][0]) + ' ')
+                # for p in range(len(pywt)):
+                #     for w in range(len(pywt[p])):
+                #         file.write(str(pywt[p][w]))
                 file.write('\n')
             file.close()
         else:
