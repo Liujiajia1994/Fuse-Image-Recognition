@@ -33,10 +33,10 @@ def ten_fold(data_file, target_file):
     print(adaBoostList / 10)
 
 
-def seven_train_thirty_test(data_file, target_file, val):
+def seven_train_thirty_test(data_file, target_file):
     # 导入数据
-    X_data = np.genfromtxt(data_file, dtype=str, delimiter=' ', usecols=range(val)).astype(float)
-    y_target = np.genfromtxt(target_file, dtype=str, delimiter=' ', usecols=range(1)).astype(int)
+    X_data = np.genfromtxt(data_file, dtype=str, delimiter=' ').astype(float)
+    y_target = np.genfromtxt(target_file, dtype=str, delimiter=' ').astype(int)
 #     取出前70%的数据作为训练集，30%的数据作为测试集
     X_train = X_data[0:int(X_data.shape[0]*0.7), :]
     y_train = y_target[0:int(y_target.size*0.7)]
@@ -86,8 +86,8 @@ def adaboost_classifier(X_train, y_train, X_test, y_test):
 
 
 if __name__ == '__main__':
-    X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/GLCM_HOG_pca_feature.txt',
-                                                               './features/target', 40)
+    X_train, y_train, X_test, y_test = seven_train_thirty_test('./features/GLCM+FD+Harris_features.txt',
+                                                               'F:/download_SAR_data/experiment_data/dataset/target.txt')
     # # 将权重赋给训练集，形成新的训练集
     # weight_list = fuze_sample_weight('./features/FD_importance.txt', './features/GLCM_importance.txt',
     #                                  './features/Harris_importance.txt')
@@ -111,10 +111,10 @@ if __name__ == '__main__':
     # clf2.fit(new_train, y_train)
     # score2 = clf2.score(new_test, y_test)
     # print('AdaBoost加权后的精度：%s' % score2)
-    clf4 = SVC()
-    clf4.fit(X_train, y_train)
-    score4 = clf4.score(X_test, y_test)
-    print('SVC分类精度：%s' % score4)
+    # clf4 = SVC()
+    # clf4.fit(X_train, y_train)
+    # score4 = clf4.score(X_test, y_test)
+    # print('SVC分类精度：%s' % score4)
     # clf5 = AdaBoostClassifier(SVC(), algorithm='SAMME')
     # clf5.fit(new_train, y_train)
     # score5 = clf5.score(new_test, y_test)
@@ -131,3 +131,22 @@ if __name__ == '__main__':
     # weights = weight_set(X_train)
     # clf2.fit(X_train, y_train, weights)
     # get_importance(clf2, './features/Harris_pca_importance.txt')
+
+    # linear SVC分类
+    clf_linear = SVC(kernel='linear')
+    clf_linear.fit(X_train, y_train)
+    # print('linear_SVC分类精度：%s' % (clf_linear.score(X_test, y_test)))
+    score_linear_SVC = clf_linear.score(X_test, y_test)
+    # rbf SVC分类
+    clf_rbf = SVC(kernel='rbf')
+    clf_rbf.fit(X_train, y_train)
+    # print('rbf_SVC分类精度：%s' % (clf_rbf.score(X_test, y_test)))
+    score_rbf_SVC = clf_rbf.score(X_test, y_test)
+    # rbf SVC分类
+    clf_poly = SVC(kernel='poly')
+    clf_poly.fit(X_train, y_train)
+    # print('rbf_SVC分类精度：%s' % (clf_poly.score(X_test, y_test)))
+    score_poly_SVC = clf_poly.score(X_test, y_test)
+    print('linear SVC最后的分类精度：%s' % score_linear_SVC)
+    print('rbf SVC最后的分类精度：%s' % score_rbf_SVC)
+    print('poly SVC最后的分类精度：%s' % score_poly_SVC)
