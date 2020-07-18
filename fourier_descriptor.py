@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import math
 
+from sklearn import preprocessing
+
 fd_len = 67
 pi = 3.1415926
 
@@ -105,7 +107,10 @@ def extract_feature(pic):
     # 傅立叶描述子
     fds = FDFT(shape_signt)
     # print(len(fds))
-    return fds
+    # return fds
+    # 尝试一下 归一化的结果
+    newFD = preprocessing.scale(fds)
+    return newFD
 
 
 def getMaxContour(pic):

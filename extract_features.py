@@ -10,6 +10,7 @@ import fourier_descriptor
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from datetime import datetime
+from sklearn import preprocessing
 
 MIN_DESCRIPTOR = 18
 eddy_file = 'F:\\download_SAR_data\\experiment_data\\dataset\\eddy\\'
@@ -36,30 +37,30 @@ def glcm_feature(img):
     contrast = greycoprops(glcms,'contrast')
     sumCon = sumH = sumCor = sumE = 0
 
-    for i in range(1):
-        for j in range(4):
-            sumCon = contrast[i][j] +sumCon
-    averageCon = sumCon/4
-
+    # for i in range(1):
+    #     for j in range(4):
+    #         sumCon = contrast[i][j] +sumCon
+    # averageCon = sumCon/4
 
     correlation = greycoprops(glcms,'correlation')
-    for i in range(1):
-        for j in range(4):
-            sumCor = correlation[i][j] +sumCor
-    averageCor = sumCor/4
+    # for i in range(1):
+    #     for j in range(4):
+    #         sumCor = correlation[i][j] +sumCor
+    # averageCor = sumCor/4
 
     energy = greycoprops(glcms,'energy')
-    for i in range(1):
-        for j in range(4):
-            sumE = energy[i][j] +sumE
-    averageE = sumE/4
+    # for i in range(1):
+    #     for j in range(4):
+    #         sumE = energy[i][j] +sumE
+    # averageE = sumE/4
 
     homogeneity = greycoprops(glcms,'homogeneity')
-    for i in range(1):
-        for j in range(4):
-            sumH = homogeneity[i][j] +sumH
-    averageHomo = sumH/4
-    return averageCon, averageCor, averageE, averageHomo
+    # for i in range(1):
+    #     for j in range(4):
+    #         sumH = homogeneity[i][j] +sumH
+    # averageHomo = sumH/4
+    # return averageCon, averageCor, averageE, averageHomo
+    return contrast, correlation, energy, homogeneity
 
 
 # harris特征
@@ -68,13 +69,16 @@ def harris_feature(img):
     # corners = corner_peaks(corner_harris(mandrill), min_distance=1)
     # 使用corner_harris获取角点
     harris = corner_harris(mandrill)
+    return harris
     # 280*280 PCA降维 280*1
-    pca = PCA(n_components=1)
-    new_harris = pca.fit_transform(harris)
-    return new_harris
+    # pca = PCA(n_components=1)
+    # new_harris = pca.fit_transform(harris)
+    # 如果不用PCA ，直接归一化
+    # new_harris = preprocessing.scale(harris)
+    # return new_harris
 
     # # PCA
-    # pca = PCA(n_components=10)
+    # pca = PCA(n_components=5)
     # pca.fit(harris)
     # pcaharris = pca.transform(harris)
     # # print(pcaharris.shape)
@@ -117,10 +121,10 @@ def feature_in_file(feature, file_path):
 
 
 # if __name__ == '__main__':
-    # t1 = datetime.now()
-    # for i in range(1964):
-    #     image = load_image(i)
-    #     if image is not None:
+#     # t1 = datetime.now()
+#     for i in range(1964):
+#         image = load_image(i)
+#         if image is not None:
     #         # Hu不变矩
     #         hu = hu_feature(image)  # 7*1
     #         print(len(hu))
